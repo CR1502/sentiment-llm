@@ -1,5 +1,3 @@
-# ml/train_full.py
-
 import os
 import pandas as pd
 from datasets import Dataset
@@ -13,6 +11,7 @@ from transformers import (
 
 # Load full cleaned training and validation data
 train_df = pd.read_csv("data/train.csv")
+train_df = train_df.sample(frac=0.5, random_state=42)
 val_df = pd.read_csv("data/val.csv")
 
 # Format the input as instruction-style prompt
@@ -47,7 +46,7 @@ training_args = TrainingArguments(
     overwrite_output_dir=True,
     per_device_train_batch_size=2,
     per_device_eval_batch_size=2,
-    num_train_epochs=5,
+    num_train_epochs=3,
     evaluation_strategy="epoch",
     save_strategy="epoch",
     logging_dir="./logs/full",
