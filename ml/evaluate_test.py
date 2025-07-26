@@ -20,7 +20,7 @@ df["prompt"] = df["review"].apply(lambda r: f"Review: {r}\nSentiment:")
 
 # Predict with progress bar
 preds = []
-for prompt in tqdm(df["prompt"], desc="🔍 Generating test predictions"):
+for prompt in tqdm(df["prompt"], desc="Generating test predictions"):
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
     output = model.generate(
         **inputs,
